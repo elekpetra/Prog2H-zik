@@ -1,13 +1,18 @@
-
 public class Main {
     public static void main(String[] args) {
-        Pont p1=new Pont(1,3);
-        Pont p2=new Pont(4,7);
+        Rectangle a=new Rectangle(4,40);
+        Rectangle b=new Rectangle(3.5,35.9);
         
-        p1.setY(p1.getY()+5);
-        p2.setX(p2.getX()-3.4);
+        System.out.println("'A' téglalap szélessége: "+a.getWidth()+"\n"+
+            "'A' téglalap magassága: "+a.getHeight()+"\n"+
+            "'A' tégalap területe: "+a.getArea()+"\n"+
+            "'A' téglalap kerülete: "+a.getPrimeter());
         
-        System.out.println("első pont: "+p1.getX()+","+p1.getY());
-        System.out.println("második pont: "+p2.getX()+","+p2.getY());
+        System.out.println("'B' téglalap szélessége: "+b.getWidth()+"\n"+
+            "'B' téglalap magassága: "+b.getHeight()+"\n"+
+            "'B' tégalap területe: "+b.getArea()+"\n"+
+            "'B' téglalap kerülete: "+b.getPrimeter());
+        
+        
     }
 }
