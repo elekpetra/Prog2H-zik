@@ -1,16 +1,23 @@
-public class Rectangle {
+public class Rectangle extends GeometricShape {
+    
+    
     public double width;
     public double height;
 
     public Rectangle() {
-        this.width=1.0;
-        this.height=1.0;
+       
     }
 
     public Rectangle(double width, double height) {
         this.width = width;
         this.height = height;
     }
+
+    public Rectangle(double width, double height, String colour, boolean filled) {
+        super(colour, filled);
+        this.width = width;
+        this.height = height;
+    } 
 
     public double getWidth() {
         return width;
@@ -33,14 +40,16 @@ public class Rectangle {
         return this.height*this.width;
     }
     
-    public double getPrimeter(){
+    public double getPerimeter(){
         return 2*(this.height+this.width);
     }
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "Rectangle{" + "width=" + width + ", height=" + height + '}';
     }
+
+    
     
     
 }
