@@ -3,57 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zh;
+package egyetem;
+
+
+import java.util.Random;
+
 
 public class Hallgato {
-    
-   public int mennyitKészült;
-   public boolean sokatTanul;
 
-    public Hallgato(int mennyitKészült, boolean sokatTanul) {
-        this.mennyitKészült = mennyitKészült;
-        this.sokatTanul = sokatTanul;
-    }
+    private int mennyitKeszult;
+    private boolean sokatTanul;
 
-    public int getMennyitKészült() {
-        return mennyitKészült;
-    }
-
-    public void setMennyitKészült(int mennyitKészült) {
-        this.mennyitKészült = mennyitKészült;
-    }
-
-    public boolean isSokatTanul() {
-        return sokatTanul;
-    }
-
-    public void setSokatTanul(boolean sokatTanul) {
+    public Hallgato(int mennyitKeszult, boolean sokatTanul) {
+        this.mennyitKeszult = mennyitKeszult;
         this.sokatTanul = sokatTanul;
     }
     
-    
-   
-   public Dolgozat dolgozatotIr(){
-       Random r=new Random();
-       int szam;
+
+    public Dolgozat dolgozatotIr() {
+        int pontszam=0;
+        Dolgozat d=new Dolgozat(pontszam);
        
-       if(sokatTanul==true) {
-           szam=(r.nextInt()%((7-4)+1)+4)*mennyitKészült;
-           
-       }
-       else {
-           szam=(r.nextInt()%((5-0)+1)+0)*mennyitKészült;
-           
-            }
-       
-       Dolgozat vissza=new Dolgozat(szam);
-       
-       if(vissza.pontszam==-1) {
-           System.out.println("Nem írt");
-       }
-       System.out.println(szam);
-       return vissza;
-       
-   }
-    
+        
+        if (sokatTanul == true) {
+            Random rnd = new Random();
+            int a = rnd.nextInt(4) + 4;
+            d.setPontszam(a * this.mennyitKeszult);
+            return d;
+        }
+        if (sokatTanul == false) {
+            Random rnd = new Random();
+            int a = rnd.nextInt(6) + 0;
+            d.setPontszam(a * this.mennyitKeszult);
+            return d;
+        }
+         
+         return d;
+
+    }
+
 }
