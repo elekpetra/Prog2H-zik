@@ -1,43 +1,54 @@
-import java.util.Random;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package feladat8;
+
+import java.util.ArrayList;
 
 
 public class Test {
-    
- public static void main(String[] args) {
- Random rnd = new Random();
- int[] t = new int[30];
- for (int i = 0; i < t.length; i++) {
- t[i] = rnd.nextInt(10);
- }
- 
- printArray(t);
- long timeStart = System.currentTimeMillis();
- insertionSort(t);
- long timeEnd = System.currentTimeMillis();
- printArray(t);
- System.out.println(timeEnd - timeStart);
- }
- static void printArray(int[] a) {
- for (int i = 0; i < a.length; i++) {
- System.out.print(a[i] + " ");
- }
- System.out.println();
- }
- static void insertionSort(int[] a) {
- // Write your code here.
-     
-        for (int i=1; i<a.length; ++i) 
-        { 
-            int k = a[i]; 
-            int j = i-1; 
-  
-
-            while (j>=0 && a[j] > k) 
-            { 
-                a[j+1] = a[j]; 
-                j = j-1; 
-            } 
-            a[j+1] = k; 
- }
+	public static void main(String[] args) {
+		
+		Sample s1 = new Sample();
+		
+		s1.add(1.0);
+		s1.add(2.0);
+	}
 }
+
+class Sample implements RealNumbers{
+
+	private ArrayList<Double> li;
+	
+	@Override
+	public void add(double num) {
+		li.add(num);
+	}
+
+	@Override
+	public double get(int idx) {
+		return li.get(idx);
+	}
+
+	@Override
+	public void delete(int idx) {
+		li.remove(idx);
+	}
+
+	@Override
+	public boolean contains(double num) {
+		return li.contains(num);
+	}
+
+	@Override
+	public int getFirstOccurrence(double num) {
+		return li.indexOf(num);
+	}
+
+	public Sample() {
+		super();
+	}
+	
 }
