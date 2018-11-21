@@ -3,52 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package feladat8;
+package feladat9;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Test {
-	public static void main(String[] args) {
-		
-		Sample s1 = new Sample();
-		
-		s1.add(1.0);
-		s1.add(2.0);
-	}
-}
 
-class Sample implements RealNumbers{
+    public static void kiir(List<Hatizsak> lista) {
+        
+        for( Hatizsak i : lista){
+            System.out.println(i);
+        }
 
-	private ArrayList<Double> li;
-	
-	@Override
-	public void add(double num) {
-		li.add(num);
-	}
+    }
 
-	@Override
-	public double get(int idx) {
-		return li.get(idx);
-	}
-
-	@Override
-	public void delete(int idx) {
-		li.remove(idx);
-	}
-
-	@Override
-	public boolean contains(double num) {
-		return li.contains(num);
-	}
-
-	@Override
-	public int getFirstOccurrence(double num) {
-		return li.indexOf(num);
-	}
-
-	public Sample() {
-		super();
-	}
-	
+    public static void main(String[] args) {
+        List<Hatizsak> ht = new ArrayList<>();
+        ht.add(new Hatizsak("adidas", 50, 3, true));
+        ht.add(new Hatizsak("nike", 60, 4, true));
+        ht.add(new Hatizsak("nike", 60, 5, true));
+        ht.add(new Hatizsak("heawytools", 50, 3, false));
+        ht.add(new Hatizsak("puma", 100, 20, false));
+        Collections.sort(ht);                
+        kiir(ht);
+    }
 }
