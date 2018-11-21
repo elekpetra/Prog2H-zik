@@ -3,15 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package feladat1;
+package feladat2;
 
-    public abstract class Ital{
+import java.util.Objects;
 
-    public Ital() {
+
+public class Ital implements Comparable<Ital>{
+    protected String név;
+    protected String kiszerelés;
+    protected int ár;
+
+    public Ital(String név, String kiszerelés, int ár) {
+        this.név = név;
+        this.kiszerelés = kiszerelés;
+        this.ár = ár;
+    }
+
+    public String getNév() {
+        return név;
+    }
+
+    public String getKiszerelés() {
+        return kiszerelés;
+    }
+
+    public int getÁr() {
+        return ár;
+    }
+
+    @Override
+    public String toString() {
+        return "név"+this.név+","+"kiszerelés"+this.kiszerelés+","+"ár"+this.ár+" Ft";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null && !(obj instanceof Ital)){
+            return false;
+        }
+        Ital i=(Ital) obj;
+        
+        return this.név.equals(i.getNév()) && this.kiszerelés.equals(i.getKiszerelés()) && this.ár==i.getÁr();
+        
+        
+    }
+
+    @Override
+    public int compareTo(Ital t) {
+        return Integer.compare(this.ár, t.getÁr());
     }
     
-    public abstract String mibolKeszult();
-    public abstract String milyenIzu();
+    
+    
     
 }
-

@@ -3,40 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zh;
+package feladat2;
 
-public class Dolgozat implements egyetem.Pontozhato<Dolgozat> {
-    public int pontszam;
 
-    public Dolgozat(int pontszam) {
-        this.pontszam = pontszam;
-    }
+public class Dolgozat {
 
-    public int getPontszam() {
-        return pontszam;
-    }
+    public static SzeszesItal[] keres(Ital[] t) {
+        int db = 0;
 
-    public void setPontszam(int pontszam) {
-        this.pontszam = pontszam;
-    }
+        for (int i = 0; i < t.length; i++) {
+            if (t[i] instanceof SzeszesItal) {
+                SzeszesItal sz = (SzeszesItal) t[i];
+                db++;
 
-    @Override
-    public String toString() {
-        return "Dolgozat{" + "pontszam=" + pontszam + '}';
-    }
-
-    @Override
-    public boolean megfelelt() {
-        if(this.pontszam>35) {
-            return true;
+            }
         }
-        if(this.pontszam==-1) {
-            System.out.println("Nem írt");
-            return false;
-            
+
+        SzeszesItal[] szesz = new SzeszesItal[db];
+
+        int index = 0;
+
+        for (int i = 0; i < t.length; i++) {
+            if (t[i] instanceof SzeszesItal) {
+                SzeszesItal sz = (SzeszesItal) t[i];
+                szesz[index] = sz;
+                index++;
+            }
         }
-        return false;
+
+        for (int i = 0; i < szesz.length - 1; i++) {
+            for (int j = i + 1; j < szesz.length; j++) {
+                if (szesz[i].getAlkoholTartalomtujaldonsag() < szesz[j].getAlkoholTartalomtujaldonsag()) {
+                    SzeszesItal tmp = szesz[i];
+                    szesz[i] = szesz[j];
+                    szesz[j] = tmp;
+                }
+            }
+        }
+        
+        
+        if(szesz.length<3){
+            SzeszesItal eredmeny[]=new SzeszesItal[1];
+            eredmeny[0]=null;
+            return eredmeny;
+        }
+        SzeszesItal eredmeny[]=new SzeszesItal[3];
+        for(int i=0;i<3;i++){
+            eredmeny[i]=szesz[i];
+        }
+        
+        return eredmeny;
+        
     }
-    
-    
+
+    public static void main(String[] args) {
+        Ital[] i = new Ital[]{
+            new SzeszesItal(40, "Whisky", "0,5", 5000),
+            new SzeszesItal(45, "házi", "50", 20),
+            new SzeszesItal(30, "alma", "sok", 40),
+            new SzeszesItal(20, "kicsi", "kevés", 30),};
+
+        SzeszesItal it[] = keres(i);
+        for (SzeszesItal k : it) {
+            System.out.println(k);
+        }
+
+    }
+
 }
