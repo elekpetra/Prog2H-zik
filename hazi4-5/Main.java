@@ -3,47 +3,64 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package feladat11;
+package feladat14;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
-   
-    public static Személy [] a; 
     
     public static void main(String[] args) {
-        Személy sz=new Személy("Mona Lisa",20,false);
-        System.out.println(sz);
         
-        Hallgató h=new Hallgató("Kis Pista", 21, true, 3.1);
-        System.out.println(h.jóképességű());
-
+        List<Zheredmenyek> zh=new ArrayList();
+        
         Scanner sc=new Scanner(System.in);
-        a=new Személy[4];
-        for(int i=0;i<4;i++) {
-            String sor=sc.nextLine();
-            String st[]=sor.split(" ");
-
-            if(i<2) {
-             a[i]=new Hallgató(st[0],Integer.parseInt(st[1]),Boolean.parseBoolean(st[2]),Double.parseDouble(st[3]));
+        String sor=sc.nextLine();
+        
+        int ures=0;
+        int volt;
+        
+        while(sor.length()>0) {
+            
+            String [] st=sor.split(";");
+            volt=0;
+            
+            if(ures==0) {
+                zh.add(new Zheredmenyek(st[0], Integer.parseInt(st[1])));
+                ures++;
             }
             
-            else{
-              a[i]=new Oktató(st[0], Integer.parseInt(st[1]), Boolean.parseBoolean(st[2]), st[3]);
+            else {
+                Zheredmenyek valt=new Zheredmenyek(st[0], Integer.parseInt(st[1]));
+                for(int i=0;i<zh.size();i++) {
+                    if(zh.get(i).getNév().compareTo(st[0])==0) {
+                        volt++;
+                        int p=zh.get(i).pont;
+                        valt.pont=valt.pont+p;
+                        zh.set(i, valt);
+                    }
+                }
+                ures++;
+                
+                if(volt==0){
+                    zh.add(valt);
+                }
+                
             }
-
+            
+            sor=sc.nextLine();
+            
         }
-        System.out.println();
-        for (Személy b : a) {
-            System.out.println(b);
+        Collections.sort(zh);
+        for (Zheredmenyek x : zh) {
+            System.out.println(x);
         }
         
-       
     }
     
-    
-    
-
 }
-
+    
