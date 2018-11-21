@@ -3,33 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package egyetem;
+package feladat21;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Main {
 
-    public static Hallgato h[];
-
     public static void main(String[] args) {
+        List<Film> li = new ArrayList();
         Scanner sc = new Scanner(System.in);
         String sor = sc.nextLine();
-        int n = Integer.parseInt(sor);
+        while (sor.length() > 0) {
+            String st[] = sor.split("[();:]");
+            for (int i = 3; i < st.length; i++) {
+                Film fc = new Film(st[i]);
+                if (li.contains(fc)) {
+                    li.get(li.indexOf(fc)).getNév().add(new Színész(st[0], Integer.parseInt(st[1])));
 
-        for (int i = 0; i < n; i++) {
+                } else {
+                    fc.getNév().add(new Színész(st[0], Integer.parseInt(st[1])));
+                    li.add(fc);
+                }
+
+            }
             sor = sc.nextLine();
-            boolean a = false;
-            String st[] = sor.split(" ");
-            if (st[1].equals("igaz")) {
-                a = true;
 
-            }
-            if(st[1].equals("hamis")){
-                a=false;
-            }
-            h[i] = new Hallgato(Integer.parseInt(st[0]), a);
-
+        }
+        Collections.sort(li);
+        for (Film i : li) {
+            System.out.println(i);
         }
 
     }
