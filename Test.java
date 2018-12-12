@@ -1,43 +1,71 @@
-import java.util.Random;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Test {
-    
- public static void main(String[] args) {
- Random rnd = new Random();
- int[] t = new int[30];
- for (int i = 0; i < t.length; i++) {
- t[i] = rnd.nextInt(10);
- }
- 
- printArray(t);
- long timeStart = System.currentTimeMillis();
- insertionSort(t);
- long timeEnd = System.currentTimeMillis();
- printArray(t);
- System.out.println(timeEnd - timeStart);
- }
- static void printArray(int[] a) {
- for (int i = 0; i < a.length; i++) {
- System.out.print(a[i] + " ");
- }
- System.out.println();
- }
- static void insertionSort(int[] a) {
- // Write your code here.
-     
-        for (int i=1; i<a.length; ++i) 
-        { 
-            int k = a[i]; 
-            int j = i-1; 
-  
 
-            while (j>=0 && a[j] > k) 
-            { 
-                a[j+1] = a[j]; 
-                j = j-1; 
-            } 
-            a[j+1] = k; 
- }
-}
+	public static ArrayList<Person> personLi = new ArrayList<Person>(); 
+	
+	public static boolean exist(String name) {
+		for (Person p : personLi) {
+			if(p.getNev().contains(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void increase(String name, String tura, int tav) {
+		for (Person p : personLi) {
+			if(p.getNev().contains(name)) {
+				p.addNewTura(new Tura(tura, tav));
+			};
+		}
+	}
+	
+	public static void read(File f) throws FileNotFoundException {
+		Scanner sc =  new Scanner(f);
+		while(sc.hasNextLine()) {			
+			
+			String line = sc.nextLine();
+			String[] l = line.split(":");
+			
+			String nev = l[0];
+			String tura = l[1];
+			int tav = Integer.parseInt(l[2]);
+			
+			if(personLi.size() == 0) {
+				Person p = new Person(nev);
+				p.addNewTura(new Tura(tura, tav));
+				personLi.add(p);
+				
+			} else if(exist(nev)) {
+				increase(nev, tura, tav);
+			}
+			else {
+				Person p = new Person(nev);
+				p.addNewTura(new Tura(tura, tav));
+				personLi.add(p);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+
+		File f = new File("sample.txt");
+		
+		try {
+			read(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		for (Person p : personLi) {
+				//p.printTurak();
+			System.out.println(p.getNev() + " " + p.leghosszabbTura());
+		}
+
+	}
+
 }
